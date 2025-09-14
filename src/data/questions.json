@@ -1,0 +1,12 @@
+[
+  { "id": 1, "text": "Who is known as the father of engineering in India?", "options": ["M. Visvesvaraya", "APJ Abdul Kalam", "E Sreedharan"] },
+  { "id": 2, "text": "Which branch of engineering do you admire most?", "options": ["Civil", "Mechanical", "Computer Science"] },
+  { "id": 3, "text": "Favourite engineering invention?", "options": ["Internet", "Electricity", "Smartphone"] },
+  { "id": 4, "text": "Preferred coding language?", "options": ["Python", "JavaScript", "C++"] },
+  { "id": 5, "text": "Most inspiring engineer?", "options": ["Nikola Tesla", "Elon Musk", "Steve Wozniak"] },
+  { "id": 6, "text": "Best engineering achievement in India?", "options": ["Chandrayaan", "Delhi Metro", "Statue of Unity"] },
+  { "id": 7, "text": "What motivates you to innovate?", "options": ["Challenge", "Curiosity", "Impact"] },
+  { "id": 8, "text": "Favourite engineering gadget?", "options": ["3D Printer", "Robot Arm", "Drones"] },
+  { "id": 9, "text": "Engineers’ Day should focus on?", "options": ["Innovation", "Education", "Environment"] },
+  { "id": 10, "text": "Would you recommend engineering to students?", "options": ["Yes", "No", "Maybe"] }
+]
