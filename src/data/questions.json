@@ -1,12 +1,86 @@
 [
-  { "id": 1, "text": "Who is known as the father of engineering in India?", "options": ["M. Visvesvaraya", "APJ Abdul Kalam", "E Sreedharan"] },
-  { "id": 2, "text": "Which branch of engineering do you admire most?", "options": ["Civil", "Mechanical", "Computer Science"] },
-  { "id": 3, "text": "Favourite engineering invention?", "options": ["Internet", "Electricity", "Smartphone"] },
-  { "id": 4, "text": "Preferred coding language?", "options": ["Python", "JavaScript", "C++"] },
-  { "id": 5, "text": "Most inspiring engineer?", "options": ["Nikola Tesla", "Elon Musk", "Steve Wozniak"] },
-  { "id": 6, "text": "Best engineering achievement in India?", "options": ["Chandrayaan", "Delhi Metro", "Statue of Unity"] },
-  { "id": 7, "text": "What motivates you to innovate?", "options": ["Challenge", "Curiosity", "Impact"] },
-  { "id": 8, "text": "Favourite engineering gadget?", "options": ["3D Printer", "Robot Arm", "Drones"] },
-  { "id": 9, "text": "Engineers’ Day should focus on?", "options": ["Innovation", "Education", "Environment"] },
-  { "id": 10, "text": "Would you recommend engineering to students?", "options": ["Yes", "No", "Maybe"] }
+  {
+    "id": 1,
+    "type": "multiple-choice",
+    "text": "How would you rate your overall experience with our product?",
+    "options": ["Excellent", "Very Good", "Good", "Fair", "Poor"]
+  },
+  {
+    "id": 2,
+    "type": "multiple-choice",
+    "text": "How likely are you to recommend our service to a friend or colleague?",
+    "options": ["Extremely likely", "Very likely", "Somewhat likely", "Not very likely", "Not at all likely"]
+  },
+  {
+    "id": 3,
+    "type": "multiple-choice",
+    "text": "Which feature do you find most valuable?",
+    "options": [
+      "User-friendly interface",
+      "Fast performance",
+      "Comprehensive features",
+      "Reliable customer support",
+      "Competitive pricing"
+    ]
+  },
+  {
+    "id": 4,
+    "type": "multiple-choice",
+    "text": "How often do you use our product?",
+    "options": ["Daily", "Several times a week", "Weekly", "Monthly", "Rarely"]
+  },
+  {
+    "id": 5,
+    "type": "multiple-choice",
+    "text": "What is your primary use case for our product?",
+    "options": [
+      "Personal projects",
+      "Small business",
+      "Enterprise solutions",
+      "Educational purposes",
+      "Research and development"
+    ]
+  },
+  {
+    "id": 6,
+    "type": "multiple-choice",
+    "text": "How satisfied are you with our customer support?",
+    "options": ["Very satisfied", "Satisfied", "Neutral", "Dissatisfied", "Very dissatisfied"]
+  },
+  {
+    "id": 7,
+    "type": "multiple-choice",
+    "text": "Which improvement would you prioritize?",
+    "options": [
+      "Better mobile experience",
+      "More integrations",
+      "Enhanced security",
+      "Faster loading times",
+      "More customization options"
+    ]
+  },
+  {
+    "id": 8,
+    "type": "multiple-choice",
+    "text": "How did you first hear about our product?",
+    "options": ["Search engine", "Social media", "Word of mouth", "Online advertisement", "Industry publication"]
+  },
+  {
+    "id": 9,
+    "type": "multiple-choice",
+    "text": "What is your role in your organization?",
+    "options": ["Executive/C-level", "Manager/Director", "Individual contributor", "Student", "Consultant/Freelancer"]
+  },
+  {
+    "id": 10,
+    "type": "multiple-choice",
+    "text": "How would you describe the value for money of our product?",
+    "options": ["Excellent value", "Good value", "Fair value", "Poor value", "Very poor value"]
+  },
+  {
+    "id": 11,
+    "type": "text",
+    "text": "Please share any additional feedback or suggestions for improvement:",
+    "placeholder": "Your thoughts and suggestions are valuable to us..."
+  }
 ]
