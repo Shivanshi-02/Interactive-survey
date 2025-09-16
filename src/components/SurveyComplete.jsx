@@ -1,57 +1,184 @@
-import React, { useEffect, useState } from 'react';
-import Confetti from 'react-confetti';
+// src/components/SurveyComplete.jsx
+import React, { useEffect, useState } from "react";
+import Confetti from "react-confetti";
 
-export default function SurveyComplete({ onTakeSurveyAgain, onViewResponses }) {
+export default function SurveyComplete({
+  onTakeSurveyAgain,
+  onViewResponses,
+  score = 0,
+  xp = 0,
+  achievements = [],
+}) {
+  const [windowDimensions, setWindowDimensions] = useState({
+    width: typeof window !== "undefined" ? window.innerWidth : 800,
+    height: typeof window !== "undefined" ? window.innerHeight : 600,
+  });
   const [showConfetti, setShowConfetti] = useState(true);
 
-  // hide confetti
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowConfetti(false);
-    }, 5000); // 5 seconds
-    return () => clearTimeout(timer);
+    function onResize() {
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+    window.addEventListener("resize", onResize);
+
+    // stop confetti after a bit
+    const t = setTimeout(() => setShowConfetti(false), 8000);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      clearTimeout(t);
+    };
   }, []);
 
-  const handleViewResponses = () => {
- 
-    onViewResponses();
+  // Map known achievement ids to nicer label or short forms if needed
+  const labelFor = (a) => {
+    if (!a) return "";
+    if (a.name) return a.name;
+    if (a.id) {
+      switch (a.id) {
+        case "gold":
+          return "Gold Contributor";
+        case "silver":
+          return "Silver Contributor";
+        case "bronze":
+          return "Bronze Contributor";
+        default:
+          return a.id;
+      }
+    }
+    return String(a);
   };
 
   return (
-    <div className="text-center p-8 flex flex-col items-center">
-      {showConfetti && <Confetti />}
-      <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mb-6">
-        <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"></path>
-        </svg>
+    <>
+      {showConfetti && (
+        <Confetti
+          width={windowDimensions.width}
+          height={windowDimensions.height}
+          recycle={false}
+          numberOfPieces={220}
+        />
+      )}
+
+      <div className="min-h-screen w-full flex items-center justify-center px-4 relative z-20">
+        <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-10 w-full max-w-lg text-center">
+          <div className="flex justify-center mb-4">
+            <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center shadow-md">
+              <svg
+                className="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
+            Survey Complete!
+          </h2>
+
+          <p className="text-gray-600 mb-4">
+            Thank you for your feedback. You earned{" "}
+            <strong className="text-gray-800">{score}</strong> points and{" "}
+            <strong className="text-gray-800">{xp}</strong> XP.
+          </p>
+
+          <div className="mb-6">
+            <h4 className="font-semibold text-gray-800 mb-3">Achievements</h4>
+
+            {/* Achievement area: responsive, wrapped pills */}
+            <div
+              className="mx-auto"
+              style={{ maxWidth: 520 }}
+            >
+              {achievements.length === 0 ? (
+                <div className="text-sm text-gray-400">No badges yet — keep going!</div>
+              ) : (
+                <div
+                  className="flex flex-wrap justify-center gap-3"
+                  style={{ maxHeight: 160, overflowY: "auto", padding: 6 }}
+                >
+                  {achievements.map((a, idx) => {
+                    const label = labelFor(a);
+                    return (
+                      <div
+                        key={a.id || idx}
+                        title={label}
+                        className="inline-flex items-center gap-3 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold"
+                        style={{
+                          background:
+                            "linear-gradient(90deg, rgba(99,102,241,0.12), rgba(6,182,212,0.08))",
+                          color: "#02171A",
+                          minWidth: 88,
+                          maxWidth: 220,
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {/* small icon circle */}
+                        <div
+                          style={{
+                            minWidth: 28,
+                            width: 28,
+                            height: 28,
+                            borderRadius: 999,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            background:
+                              "linear-gradient(90deg, #06B6D4, #8B5CF6)",
+                            color: "#02171A",
+                            fontWeight: 900,
+                            fontSize: 12,
+                          }}
+                        >
+                          ✓
+                        </div>
+
+                        <div className="truncate" style={{ textAlign: "left" }}>
+                          {label}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <button
+              onClick={onViewResponses}
+              className="border border-blue-500 text-blue-500 rounded-full px-5 py-3 hover:bg-blue-50 transition"
+            >
+              View My Responses
+            </button>
+
+            <button
+              onClick={onTakeSurveyAgain}
+              className="bg-blue-500 text-white rounded-full px-5 py-3 hover:bg-blue-600 transition"
+            >
+              Take Survey Again
+            </button>
+          </div>
+
+          <p className="text-gray-400 text-sm mt-6">
+            Your responses are anonymous and will be used to improve our services.
+          </p>
+        </div>
       </div>
-      <h2 className="text-3xl font-bold text-gray-800 mb-4">Survey Complete!</h2>
-      <p className="text-gray-600 mb-8">
-        Thank you for taking the time to share your valuable feedback with us. Your responses help us improve our services.
-      </p>
-      <div className="flex space-x-4 mb-8">
-        <button
-          onClick={handleViewResponses}
-          className="flex items-center space-x-2 py-3 px-6 border border-gray-300 rounded-lg text-gray-600 font-semibold hover:bg-gray-100 transition-colors duration-200"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0a2 2 0 002 2h2a2 2 0 002-2v-6a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path>
-          </svg>
-          <span>View My Responses</span>
-        </button>
-        <button
-          onClick={onTakeSurveyAgain}
-          className="flex items-center space-x-2 py-3 px-6 rounded-lg text-white font-semibold bg-gradient-to-r from-teal-500 to-orange-500 hover:opacity-90 transition-opacity duration-200"
-        >
-          <svg className="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.42 2a4.49 4.49 0 00-2.31 1.34L16 16.5m-8-8l-2 2-2-2m2 0V4a2 2 0 012-2h4a2 2 0 012 2v4a2 2 0 01-2 2h-4a2 2 0 00-2 2v2"></path>
-          </svg>
-          <span>Take Survey Again</span>
-        </button>
-      </div>
-      <p className="text-gray-500 text-sm mt-4">
-        Your responses are anonymous and will be used to improve our services.
-      </p>
-    </div>
+    </>
   );
 }
+
